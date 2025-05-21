@@ -6,7 +6,7 @@ const DashboardMember = () => {
     const savedCount = localStorage.getItem('smokeFreeCount');
     return savedCount ? parseInt(savedCount, 10) : 0;
   });
-  
+
   const [startDate, setStartDate] = useState(() => {
     const savedDate = localStorage.getItem('smokeFreeStartDate');
     return savedDate ? new Date(savedDate) : new Date();
@@ -60,7 +60,7 @@ const DashboardMember = () => {
 
   const handleQuitChoiceSelect = (choice) => {
     setQuitChoice(choice);
-    
+
     if (choice === 'today') {
       setStartDate(new Date());
     } else if (choice === 'tomorrow') {
@@ -75,14 +75,14 @@ const DashboardMember = () => {
 
   const handleSubmitPlan = () => {
     setHasPlan(true);
-    
+
     // If today, start counting immediately
     if (quitChoice === 'today') {
       setSmokeFreeCount(1);
     } else {
       setSmokeFreeCount(0);
     }
-    
+
     // Recalculate money saved
     const cigaretteCost = pricePerPack / cigarettesPerPack;
     const savedMoney = smokeFreeCount * cigarettesPerDay * cigaretteCost;
@@ -91,7 +91,7 @@ const DashboardMember = () => {
 
   const increaseSmokeFreeDay = () => {
     setSmokeFreeCount(prev => prev + 1);
-    
+
     // Recalculate money saved
     const cigaretteCost = pricePerPack / cigarettesPerPack;
     const newCount = smokeFreeCount + 1;
@@ -160,7 +160,7 @@ const DashboardMember = () => {
             boxShadow: '0 4px 6px rgba(53, 167, 156, 0.2)'
           }}>Back to Home</Link>
         </div>
-        
+
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
@@ -174,7 +174,7 @@ const DashboardMember = () => {
             boxShadow: '0 5px 15px rgba(0, 0, 0, 0.05)'
           }}>
             <h2 style={{ fontWeight: '600', marginBottom: '1rem', color: '#35a79c' }}>Quit Plan</h2>
-            
+
             {!hasPlan ? (
               <div style={{ color: '#7f8c8d', lineHeight: '1.6' }}>
                 <div style={{ marginBottom: '1.5rem' }}>
@@ -183,10 +183,10 @@ const DashboardMember = () => {
                   </label>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     <div>
-                      <input 
-                        type="radio" 
-                        id="today" 
-                        name="quitDay" 
+                      <input
+                        type="radio"
+                        id="today"
+                        name="quitDay"
                         value="today"
                         checked={quitChoice === 'today'}
                         onChange={() => handleQuitChoiceSelect('today')}
@@ -194,10 +194,10 @@ const DashboardMember = () => {
                       <label htmlFor="today" style={{ marginLeft: '0.5rem' }}>Today</label>
                     </div>
                     <div>
-                      <input 
-                        type="radio" 
-                        id="tomorrow" 
-                        name="quitDay" 
+                      <input
+                        type="radio"
+                        id="tomorrow"
+                        name="quitDay"
                         value="tomorrow"
                         checked={quitChoice === 'tomorrow'}
                         onChange={() => handleQuitChoiceSelect('tomorrow')}
@@ -205,22 +205,22 @@ const DashboardMember = () => {
                       <label htmlFor="tomorrow" style={{ marginLeft: '0.5rem' }}>Tomorrow</label>
                     </div>
                     <div>
-                      <input 
-                        type="radio" 
-                        id="custom" 
-                        name="quitDay" 
+                      <input
+                        type="radio"
+                        id="custom"
+                        name="quitDay"
                         value="custom"
                         checked={quitChoice === 'custom'}
                         onChange={() => handleQuitChoiceSelect('custom')}
                       />
                       <label htmlFor="custom" style={{ marginLeft: '0.5rem' }}>Select my date</label>
                       {quitChoice === 'custom' && (
-                        <input 
-                          type="date" 
+                        <input
+                          type="date"
                           value={customDate}
                           onChange={(e) => setCustomDate(e.target.value)}
-                          style={{ 
-                            display: 'block', 
+                          style={{
+                            display: 'block',
                             marginTop: '0.5rem',
                             padding: '0.5rem',
                             borderRadius: '5px',
@@ -230,10 +230,10 @@ const DashboardMember = () => {
                       )}
                     </div>
                     <div>
-                      <input 
-                        type="radio" 
-                        id="not_ready" 
-                        name="quitDay" 
+                      <input
+                        type="radio"
+                        id="not_ready"
+                        name="quitDay"
                         value="not_ready"
                         checked={quitChoice === 'not_ready'}
                         onChange={() => handleQuitChoiceSelect('not_ready')}
@@ -242,17 +242,17 @@ const DashboardMember = () => {
                     </div>
                   </div>
                 </div>
-                
+
                 <div style={{ marginTop: '1.5rem' }}>
                   <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600' }}>
                     Cigarettes smoked per day:
                   </label>
-                  <input 
-                    type="number" 
+                  <input
+                    type="number"
                     min="1"
                     value={cigarettesPerDay}
                     onChange={(e) => setCigarettesPerDay(parseInt(e.target.value))}
-                    style={{ 
+                    style={{
                       padding: '0.5rem',
                       borderRadius: '5px',
                       border: '1px solid #ddd',
@@ -260,16 +260,16 @@ const DashboardMember = () => {
                       marginBottom: '1rem'
                     }}
                   />
-                  
+
                   <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600' }}>
                     Cigarettes per pack:
                   </label>
-                  <input 
-                    type="number" 
+                  <input
+                    type="number"
                     min="1"
                     value={cigarettesPerPack}
                     onChange={(e) => setCigarettesPerPack(parseInt(e.target.value))}
-                    style={{ 
+                    style={{
                       padding: '0.5rem',
                       borderRadius: '5px',
                       border: '1px solid #ddd',
@@ -277,17 +277,17 @@ const DashboardMember = () => {
                       marginBottom: '1rem'
                     }}
                   />
-                  
+
                   <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600' }}>
                     Price per pack (VND):
                   </label>
-                  <input 
-                    type="number" 
+                  <input
+                    type="number"
                     min="1000"
                     step="1000"
                     value={pricePerPack}
                     onChange={(e) => setPricePerPack(parseInt(e.target.value))}
-                    style={{ 
+                    style={{
                       padding: '0.5rem',
                       borderRadius: '5px',
                       border: '1px solid #ddd',
@@ -296,8 +296,8 @@ const DashboardMember = () => {
                     }}
                   />
                 </div>
-                
-                <button 
+
+                <button
                   onClick={handleSubmitPlan}
                   disabled={quitChoice === 'not_selected'}
                   style={{
@@ -330,7 +330,7 @@ const DashboardMember = () => {
                 <p>
                   <strong>Daily cost:</strong> {formatCurrency(pricePerPack / cigarettesPerPack * cigarettesPerDay)}
                 </p>
-                <button 
+                <button
                   onClick={resetPlan}
                   style={{
                     padding: '0.7rem 1.2rem',
@@ -349,7 +349,7 @@ const DashboardMember = () => {
               </div>
             )}
           </div>
-          
+
           <div style={{
             padding: '2rem',
             backgroundColor: 'white',
@@ -362,7 +362,7 @@ const DashboardMember = () => {
               Money saved: <span style={{ fontWeight: 'bold', color: '#27ae60' }}>{formatCurrency(moneySaved)}</span>
             </p>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <button 
+              <button
                 onClick={increaseSmokeFreeDay}
                 style={{
                   padding: '0.7rem 1.2rem',
@@ -377,7 +377,7 @@ const DashboardMember = () => {
               >
                 Add Smoke-Free Day
               </button>
-              <button 
+              <button
                 onClick={resetSmokeFreeCount}
                 style={{
                   padding: '0.7rem 1.2rem',
@@ -394,7 +394,7 @@ const DashboardMember = () => {
               </button>
             </div>
           </div>
-          
+
           <div style={{
             padding: '2rem',
             backgroundColor: 'white',
