@@ -23,45 +23,51 @@ function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  
+
   const handleRoleSelect = (role) => {
     setSelectedRole(role);
     setShowDropdown(false);
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Clear previous errors
     setError('');
-    
+
     // Validate input fields
     if (!username.trim() || !password.trim()) {
       setError('Please enter both username and password');
       return;
     }
-    
+
     // Check against fake user database
-    const user = fakeUsers.find(user => 
-      user.username === username && 
+    const user = fakeUsers.find(user =>
+      user.username === username &&
       user.password === password &&
       user.role === selectedRole
     );
-    
+
     if (user) {
       // Store user info in localStorage
       localStorage.setItem('userRole', user.role);
       localStorage.setItem('userName', user.name);
       localStorage.setItem('userLoggedIn', 'true');
       localStorage.setItem('userId', user.username);
-      
-      // Redirect to Home
-      navigate('/');
+
+      // Redirect based on role
+      if (user.role === 'Member') {
+        navigate('/homepage-member');
+      } else if (user.role === 'Coach') {
+        navigate('/dashboard-coach');
+      } else {
+        navigate('/');
+      }
     } else {
       setError('Invalid username, password, or role. Please try again.');
     }
   };
-  
+
   return (
     <div style={{
       minHeight: '100vh',
@@ -103,13 +109,13 @@ function Login() {
         <div style={{ fontSize: '2rem', fontWeight: 800, color: '#002f6c', marginBottom: '0.5rem', lineHeight: 1.1, fontFamily: "'Brasika', 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif" }}>
           Welcome back!
         </div>
-        
+
         {/* Display error message if any */}
         {error && (
-          <div style={{ 
-            color: '#e53935', 
-            background: '#ffebee', 
-            padding: '0.8rem 1rem', 
+          <div style={{
+            color: '#e53935',
+            background: '#ffebee',
+            padding: '0.8rem 1rem',
             borderRadius: '8px',
             fontSize: '0.95rem',
             fontWeight: '500'
@@ -117,7 +123,7 @@ function Login() {
             {error}
           </div>
         )}
-        
+
         <div style={{ marginBottom: '0.5rem' }}>
           <span style={{ color: '#888', fontWeight: 500, fontSize: '1.08rem', marginRight: 8 }}>I'm a</span>
           <div style={{ display: 'inline-block', position: 'relative', minWidth: 180 }}>
@@ -183,9 +189,9 @@ function Login() {
             )}
           </div>
         </div>
-        <input 
-          type="text" 
-          placeholder="Username" 
+        <input
+          type="text"
+          placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           style={{
@@ -194,11 +200,11 @@ function Login() {
             border: '1.5px solid #e5e8ee',
             fontSize: '1.08rem',
             outline: 'none',
-          }} 
+          }}
         />
-        <input 
-          type="password" 
-          placeholder="Password" 
+        <input
+          type="password"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           style={{
@@ -207,7 +213,7 @@ function Login() {
             border: '1.5px solid #e5e8ee',
             fontSize: '1.08rem',
             outline: 'none',
-          }} 
+          }}
         />
         <button type="submit" style={{
           background: '#002f6c',
@@ -226,9 +232,9 @@ function Login() {
           Don't have an account?{' '}
           <Link to="/register" style={{ color: '#0057b8', fontWeight: 700, textDecoration: 'underline' }}>Register</Link>
         </div>
-        
+
         {/* Demo login info */}
-        <div style={{ 
+        <div style={{
           marginTop: '1rem',
           fontSize: '0.9rem',
           color: '#888',

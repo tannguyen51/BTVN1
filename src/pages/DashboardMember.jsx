@@ -150,15 +150,20 @@ const DashboardMember = () => {
             color: '#2c3e50',
             margin: 0
           }}>Member Dashboard</h1>
-          <Link to="/" style={{
-            padding: '0.5rem 1.5rem',
-            backgroundColor: '#35a79c',
-            color: 'white',
-            textDecoration: 'none',
-            borderRadius: '50px',
-            fontWeight: '500',
-            boxShadow: '0 4px 6px rgba(53, 167, 156, 0.2)'
-          }}>Back to Home</Link>
+          <div style={{
+            display: 'flex',
+            gap: '1rem'
+          }}>
+            <Link to="/homepage-member" style={{
+              padding: '0.5rem 1.5rem',
+              backgroundColor: '#35a79c',
+              color: 'white',
+              textDecoration: 'none',
+              borderRadius: '50px',
+              fontWeight: '500',
+              boxShadow: '0 4px 6px rgba(53, 167, 156, 0.2)'
+            }}>Back to Member Home</Link>
+          </div>
         </div>
 
         <div style={{

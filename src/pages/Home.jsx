@@ -9,6 +9,7 @@ import img2_12w from '../assets/2-12w.png';
 import img3_9m from '../assets/3-9m.png';
 import img1y from '../assets/1y.png';
 import img10y from '../assets/10y.png';
+import DoctorModal from '../components/DoctorModal';
 
 // Icon SVGs
 const icons = {
@@ -48,6 +49,9 @@ function Home() {
     message: '',
     isRobot: true
   });
+
+  // Doctor Modal state
+  const [showDoctorModal, setShowDoctorModal] = useState(false);
 
   useEffect(() => {
     if (showSearch && searchInputRef.current) {
@@ -124,6 +128,8 @@ function Home() {
       isRobot: true
     });
   };
+
+
 
   return (
     <div style={{
@@ -379,7 +385,12 @@ function Home() {
               >
                 Contact
               </button>
-              <button style={dropdownBtnStyle}>Doctor</button>
+              <button
+                onClick={() => navigate('/doctors')}
+                style={dropdownBtnStyle}
+              >
+                Doctor
+              </button>
               <button style={dropdownBtnStyle}>Chat Message</button>
             </div>
           )}
@@ -688,6 +699,14 @@ function Home() {
             </form>
           </div>
         </div>
+      )}
+
+      {/* Doctor Modal */}
+      {showDoctorModal && (
+        <DoctorModal
+          isOpen={showDoctorModal}
+          onClose={() => setShowDoctorModal(false)}
+        />
       )}
 
       {/* Hero Section */}
