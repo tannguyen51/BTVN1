@@ -402,7 +402,13 @@ function Home() {
               >
                 Bác Sĩ
               </button>
-              <button style={dropdownBtnStyle}>Nhắn Tin Hỗ Trợ</button>
+              <button
+                onClick={() => navigate('/contact-staff')}
+                style={dropdownBtnStyle}
+              >
+                Nhắn Tin Hỗ Trợ
+              </button>
+
             </div>
           )}
         </div>
